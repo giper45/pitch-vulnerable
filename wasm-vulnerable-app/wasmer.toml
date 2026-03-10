@@ -1,0 +1,39 @@
+[package]
+name = "giper45/wasm-vulnerable-app"
+version = "0.1.0"
+description = "PHP app on Wasmer"
+
+[dependencies]
+"php/php" = "8.0.10"
+
+[fs]
+"/app" = "app"
+"/assets" = "app/assets"
+"/uploads" = "uploads"
+"/sandbox_etc" = "fake_etc"             # Source files to hydrate /etc at runtime
+"/var/log" = "fake_logs"                # Fake /var/log for writable logs
+
+[[command]]
+name = "run"
+module = "php/php:php"
+runner = "wasi"
+
+[command.annotations.wasi]
+main-args = [
+    "-t", "/app", 
+    "-S", "127.0.0.1:9999",
+    "/app/bootstrap.php" # Setup bootstrap + router globale
+]
+
+[[command]]
+name = "run-debug"
+module = "php/php:php"
+runner = "wasi"
+
+[command.annotations.wasi]
+main-args = [
+    "-t", "/app",
+    "-S", "127.0.0.1:9999",
+    "/app/bootstrap.php"
+]
+env = ["PV_DEBUG=true"]

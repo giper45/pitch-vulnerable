@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Generic football arena</title>
+  <desc id="desc">Stylized monochrome football arena with floodlights.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a0b0f"/>
+      <stop offset="55%" stop-color="#1a1d27"/>
+      <stop offset="100%" stop-color="#050608"/>
+    </linearGradient>
+    <linearGradient id="pitch" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#32483c"/>
+      <stop offset="100%" stop-color="#172019"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <circle cx="180" cy="170" r="170" fill="#ffffff" opacity=".05"/>
+  <circle cx="1400" cy="120" r="150" fill="#ffffff" opacity=".04"/>
+  <path d="M120 320h1360l-110 430H230L120 320z" fill="#11141b"/>
+  <path d="M260 450h1080l-75 230H335L260 450z" fill="url(#pitch)"/>
+  <rect x="455" y="450" width="690" height="230" fill="none" stroke="#dfe5dd" stroke-opacity=".55" stroke-width="7"/>
+  <circle cx="800" cy="565" r="48" fill="none" stroke="#dfe5dd" stroke-opacity=".55" stroke-width="7"/>
+  <path d="M680 450v230M920 450v230" stroke="#dfe5dd" stroke-opacity=".38" stroke-width="4"/>
+  <g fill="#f8f9fb" opacity=".85">
+    <rect x="220" y="180" width="110" height="16" rx="8"/>
+    <rect x="1270" y="180" width="110" height="16" rx="8"/>
+    <rect x="180" y="210" width="150" height="12" rx="6"/>
+    <rect x="1270" y="210" width="150" height="12" rx="6"/>
+  </g>
+</svg>

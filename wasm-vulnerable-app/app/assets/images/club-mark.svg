@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" role="img" aria-labelledby="title desc">
+  <title id="title">Pitch-Vulnerable club mark</title>
+  <desc id="desc">Generic monochrome shield with diagonal stripes.</desc>
+  <rect width="320" height="320" rx="64" fill="#f6f7f9"/>
+  <path d="M68 54h184v104c0 58-34 111-92 140-58-29-92-82-92-140V54z" fill="#0d0f14"/>
+  <path d="M104 88h28v150h-28zM146 88h28v170h-28zM188 88h28v150h-28z" fill="#f6f7f9"/>
+  <path d="M92 216c23 20 44 31 68 42 24-11 45-22 68-42H92z" fill="#d9dde5" opacity=".35"/>
+</svg>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-labelledby="title desc">
+  <title id="title">Winger role card</title>
+  <desc id="desc">Generic monochrome football card for a winger role.</desc>
+  <rect width="800" height="520" fill="#0f1116"/>
+  <path d="M0 70h800v110H0z" fill="#191d26"/>
+  <path d="M0 380h800v140H0z" fill="#1d212a"/>
+  <circle cx="400" cy="214" r="116" fill="#f3f5f8"/>
+  <path d="M324 277c18-52 36-72 76-72s58 20 76 72H324z" fill="#0f1116"/>
+  <path d="M252 388c54-60 105-82 148-82s94 22 148 82H252z" fill="#f3f5f8"/>
+  <text x="58" y="92" font-size="84" font-family="Arial, sans-serif" fill="#f3f5f8">11</text>
+  <text x="58" y="468" font-size="42" font-family="Arial, sans-serif" fill="#f3f5f8">WINGER</text>
+</svg>

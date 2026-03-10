@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-labelledby="title desc">
+  <title id="title">Striker role card</title>
+  <desc id="desc">Generic monochrome football card for a striker role.</desc>
+  <rect width="800" height="520" fill="#111319"/>
+  <path d="M0 430L800 170v350H0z" fill="#1d212a"/>
+  <circle cx="400" cy="205" r="118" fill="#f5f7fb"/>
+  <path d="M318 288c24-58 36-77 82-77s58 19 82 77H318z" fill="#111319"/>
+  <path d="M277 375c45-52 87-70 123-70s78 18 123 70H277z" fill="#f5f7fb"/>
+  <text x="62" y="88" font-size="92" font-family="Arial, sans-serif" fill="#f5f7fb">9</text>
+  <text x="62" y="462" font-size="44" font-family="Arial, sans-serif" fill="#f5f7fb">STRIKER</text>
+</svg>

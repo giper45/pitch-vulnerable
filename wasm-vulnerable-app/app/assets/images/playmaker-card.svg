@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-labelledby="title desc">
+  <title id="title">Playmaker role card</title>
+  <desc id="desc">Generic monochrome football card for a playmaker role.</desc>
+  <rect width="800" height="520" fill="#101218"/>
+  <path d="M0 0l800 520H0z" fill="#1c2028"/>
+  <path d="M800 0v520L0 0z" fill="#181b23" opacity=".75"/>
+  <circle cx="400" cy="210" r="115" fill="#f5f7fb"/>
+  <path d="M323 282c20-55 39-76 77-76s57 21 77 76H323z" fill="#101218"/>
+  <path d="M270 392c49-55 92-76 130-76s81 21 130 76H270z" fill="#f5f7fb"/>
+  <text x="58" y="94" font-size="84" font-family="Arial, sans-serif" fill="#f5f7fb">6</text>
+  <text x="58" y="466" font-size="36" font-family="Arial, sans-serif" fill="#f5f7fb">PLAYMAKER</text>
+</svg>

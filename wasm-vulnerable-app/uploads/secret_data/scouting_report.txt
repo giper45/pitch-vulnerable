@@ -1,0 +1,3 @@
+Pitch-Vulnerable scouting report
+Objective 2 tip: try traversal from /app/biographies to ../../uploads/secret_data/scouting_report.txt
+Flag preview: LFI{blackfield_traversal_success}

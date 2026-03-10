@@ -1,0 +1,4 @@
+kind: wasmer.io/App.v0
+name: wasm-vulnerable-app
+owner: giper45
+package: .

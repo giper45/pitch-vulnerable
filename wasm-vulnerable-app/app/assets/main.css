@@ -1,0 +1,279 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;600;700&display=swap');
+
+:root {
+    --jv-bg: #0a0b0f;
+    --jv-bg-soft: #12141b;
+    --jv-surface: rgba(17, 18, 25, 0.95);
+    --jv-border: rgba(255, 255, 255, 0.14);
+    --jv-text: #f4f5f8;
+    --jv-muted: #c3c7d1;
+    --jv-ok: #8ad89f;
+    --jv-warn: #ffdb66;
+    --jv-bad: #ff7b7b;
+}
+
+body.jv-page {
+    font-family: 'Rajdhani', sans-serif;
+    color: var(--jv-text);
+    background:
+        radial-gradient(circle at 12% 18%, rgba(255, 255, 255, 0.08), transparent 34%),
+        radial-gradient(circle at 87% 10%, rgba(255, 255, 255, 0.06), transparent 36%),
+        linear-gradient(122deg, #07080c 0%, #161923 48%, #0c0d12 100%);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.jv-brand-text {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.5px;
+}
+
+.jv-topbar {
+    background: rgba(9, 10, 14, 0.92);
+    border-bottom: 1px solid var(--jv-border);
+    backdrop-filter: blur(8px);
+}
+
+.jv-topbar .nav-link {
+    color: #dee1e8;
+}
+
+.jv-topbar .nav-link:hover,
+.jv-topbar .nav-link:focus {
+    color: #ffffff;
+}
+
+.jv-brand-logo {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #fff;
+    padding: 4px;
+}
+
+.jv-brand-text {
+    font-size: 1.7rem;
+    line-height: 1;
+}
+
+.jv-card,
+.panel {
+    background: var(--jv-surface);
+    border: 1px solid var(--jv-border);
+    border-radius: 14px;
+    box-shadow: 0 16px 24px rgba(0, 0, 0, 0.22);
+}
+
+.jv-hero {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--jv-border);
+    border-radius: 18px;
+    margin-bottom: 1.25rem;
+}
+
+.jv-hero img {
+    width: 100%;
+    height: clamp(220px, 40vw, 360px);
+    object-fit: cover;
+    filter: contrast(0.95) saturate(0.85);
+}
+
+.jv-hero-overlay {
+    position: absolute;
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    padding: 0.9rem 1rem;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.62);
+}
+
+.jv-hero-overlay h2 {
+    margin: 0;
+    font-size: clamp(1.6rem, 2.4vw, 2.4rem);
+}
+
+.jv-hero-overlay p {
+    margin: 0.2rem 0 0;
+    color: #e0e3ea;
+}
+
+.jv-news-card.card {
+    background: rgba(21, 23, 31, 0.95);
+    border: 1px solid var(--jv-border);
+}
+
+.jv-news-card .card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.jv-cover {
+    width: 100%;
+    height: clamp(170px, 24vw, 210px);
+    object-fit: cover;
+    object-position: center;
+}
+
+.jv-logo-cover {
+    object-fit: contain;
+    background: #f5f5f7;
+    padding: 0.6rem;
+}
+
+.jv-panel-title {
+    margin-bottom: 0.6rem;
+    font-size: 1.8rem;
+}
+
+.jv-muted {
+    color: var(--jv-muted);
+}
+
+.notice {
+    border-radius: 10px;
+    padding: 0.7rem 0.85rem;
+    border: 1px solid;
+    margin-bottom: 0.75rem;
+}
+
+.notice.warn {
+    color: #ffe9af;
+    border-color: #9f8337;
+    background: rgba(255, 219, 102, 0.11);
+}
+
+.notice.ok {
+    color: #cff4db;
+    border-color: #4f9967;
+    background: rgba(138, 216, 159, 0.12);
+}
+
+.notice.bad {
+    color: #ffd0d0;
+    border-color: #9d4a4a;
+    background: rgba(255, 123, 123, 0.12);
+}
+
+.inline-code {
+    display: inline-block;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    color: #fefefe;
+    background: rgba(255, 255, 255, 0.09);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 6px;
+    padding: 0.08rem 0.38rem;
+}
+
+pre,
+code {
+    color: #e6ebf5;
+}
+
+pre {
+    background: #0b0c10;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 10px;
+    padding: 0.8rem;
+    margin: 0;
+    overflow-x: auto;
+}
+
+.table-wrap {
+    overflow-x: auto;
+}
+
+.table {
+    --bs-table-bg: transparent;
+    --bs-table-color: #ecedf2;
+    --bs-table-border-color: rgba(255, 255, 255, 0.13);
+    --bs-table-striped-color: #ecedf2;
+    --bs-table-striped-bg: rgba(255, 255, 255, 0.035);
+    --bs-table-hover-color: #fff;
+    --bs-table-hover-bg: rgba(255, 255, 255, 0.06);
+}
+
+.badge.solved {
+    color: #0d2f1a;
+    background: #9be7b2;
+}
+
+.badge.unsolved {
+    color: #3a1515;
+    background: #ffb5b5;
+}
+
+.attack-log {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.88rem;
+    line-height: 1.55;
+    background: #090a0d;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    padding: 0.75rem;
+    max-height: 280px;
+    overflow-y: auto;
+}
+
+.guest-entry {
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 10px;
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.guest-meta {
+    color: #bfc3cd;
+    font-size: 0.86rem;
+    margin-bottom: 0.35rem;
+}
+
+.hidden-frame {
+    width: 0;
+    height: 0;
+    border: 0;
+    position: absolute;
+    left: -9999px;
+}
+
+.champion-banner {
+    margin-top: 0.8rem;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 14px;
+    padding: 1rem 1.1rem;
+    background: linear-gradient(120deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2rem, 5.6vw, 4.4rem);
+    letter-spacing: 1.2px;
+    line-height: 1.05;
+    text-transform: uppercase;
+    text-align: center;
+    text-wrap: balance;
+}
+
+.champion-banner-note {
+    margin-top: 0.5rem;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: clamp(0.95rem, 1.8vw, 1.2rem);
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    text-transform: none;
+    opacity: 0.95;
+}
+
+.jv-footer {
+    border-top: 1px solid var(--jv-border);
+}
+
+@media (max-width: 991.98px) {
+    .jv-hero-overlay {
+        position: static;
+        margin: 0.8rem;
+    }
+}
