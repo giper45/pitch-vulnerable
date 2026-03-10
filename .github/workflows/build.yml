@@ -1,0 +1,160 @@
+name: Bundle portable packages
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*"
+
+env:
+  WASMER_VERSION: "7.0.1"
+  APP_NAME: "wasm-vulnerable-app"
+
+jobs:
+  bundle:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            target: linux-amd64
+            wasmer_asset: wasmer-linux-amd64.tar.gz
+            archive: tar.gz
+          - os: ubuntu-latest
+            target: linux-aarch64
+            wasmer_asset: wasmer-linux-aarch64.tar.gz
+            archive: tar.gz
+          - os: macos-latest
+            target: darwin-amd64
+            wasmer_asset: wasmer-darwin-amd64.tar.gz
+            archive: tar.gz
+          - os: macos-latest
+            target: darwin-arm64
+            wasmer_asset: wasmer-darwin-arm64.tar.gz
+            archive: tar.gz
+          - os: windows-latest
+            target: windows-amd64
+            wasmer_asset: wasmer-windows-amd64.tar.gz
+            archive: zip
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Prepare bundle folder
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf dist
+          mkdir -p "dist/${{ env.APP_NAME }}-${{ matrix.target }}/binaries/wasmer"
+          cp -R "wasm-vulnerable-app" "dist/${{ env.APP_NAME }}-${{ matrix.target }}/wasm-vulnerable-app"
+          rm -f "dist/${{ env.APP_NAME }}-${{ matrix.target }}/wasm-vulnerable-app/writeup.md"
+
+      - name: Download Wasmer (v${{ env.WASMER_VERSION }})
+        shell: bash
+        run: |
+          set -euo pipefail
+          url="https://github.com/wasmerio/wasmer/releases/download/v${WASMER_VERSION}/${{ matrix.wasmer_asset }}"
+          echo "Downloading: $url"
+          curl -fL "$url" -o wasmer.tar.gz
+
+      - name: Extract Wasmer and place binary
+        shell: bash
+        run: |
+          set -euo pipefail
+          tmp="$(mktemp -d)"
+          tar -xzf wasmer.tar.gz -C "$tmp"
+
+          # Find the binary (wasmer or wasmer.exe) inside the archive
+          found="$(find "$tmp" -type f \( -name wasmer -o -name wasmer.exe \) | head -n 1)"
+          if [[ -z "${found}" ]]; then
+            echo "Error: wasmer binary not found in tar.gz" >&2
+            find "$tmp" -maxdepth 6 -type f | sed 's/^/ - /'
+            exit 1
+          fi
+
+          if [[ "${{ runner.os }}" == "Windows" ]]; then
+            dest="dist/${{ env.APP_NAME }}-${{ matrix.target }}/binaries/wasmer/wasmer.exe"
+          else
+            dest="dist/${{ env.APP_NAME }}-${{ matrix.target }}/binaries/wasmer/wasmer"
+          fi
+          cp "$found" "$dest"
+
+          # On Unix make this file executable (should already be, but just in case)
+          if [[ "${{ runner.os }}" != "Windows" ]]; then
+            chmod +x "$dest"
+          fi
+
+      - name: Create run scripts
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > "dist/${{ env.APP_NAME }}-${{ matrix.target }}/run.sh" <<'SH'
+          #!/usr/bin/env bash
+          set -euo pipefail
+          ROOT="$(cd "$(dirname "$0")" && pwd)"
+          WASMER="$ROOT/binaries/wasmer/wasmer"
+          APPDIR="$ROOT/wasm-vulnerable-app"
+          if [[ "$(uname -s)" == "Darwin" ]]; then
+            xattr -dr com.apple.quarantine "$WASMER" 2>/dev/null || true
+          fi
+          chmod +x "$WASMER" 2>/dev/null || true
+          cd "$APPDIR"
+          exec "$WASMER" run . --net --command run
+          SH
+
+          cat > "dist/${{ env.APP_NAME }}-${{ matrix.target }}/run.bat" <<'BAT'
+          @echo off
+          setlocal
+          set ROOT=%~dp0
+          set WASMER=%ROOT%binaries\wasmer\wasmer.exe
+          set APPDIR=%ROOT%wasm-vulnerable-app
+          if not exist "%WASMER%" (
+            echo Error: wasmer.exe not found: %WASMER%
+            exit /b 1
+          )
+          cd /d "%APPDIR%"
+          "%WASMER%" run . --net --command run
+          endlocal
+          BAT
+
+          # Executability for run.sh on Unix
+          if [[ "${{ runner.os }}" != "Windows" ]]; then
+            chmod +x "dist/${{ env.APP_NAME }}-${{ matrix.target }}/run.sh"
+          fi
+
+      - name: Create archive (tar.gz)
+        if: matrix.archive == 'tar.gz'
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd dist
+          tar -czf "${{ env.APP_NAME }}-${{ matrix.target }}.tar.gz" "${{ env.APP_NAME }}-${{ matrix.target }}"
+
+      - name: Create archive (zip)
+        if: matrix.archive == 'zip'
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd dist
+          # zip is available by default on Windows runners, therefore we can use it directly 
+        continue-on-error: true
+
+      - name: Create archive (zip) - PowerShell
+        if: matrix.archive == 'zip'
+        shell: pwsh
+        run: |
+          Set-StrictMode -Version Latest
+          $src = "dist/${{ env.APP_NAME }}-${{ matrix.target }}"
+          $dst = "dist/${{ env.APP_NAME }}-${{ matrix.target }}.zip"
+          if (Test-Path $dst) { Remove-Item $dst }
+          Compress-Archive -Path $src -DestinationPath $dst
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.APP_NAME }}-${{ matrix.target }}
+          path: |
+            dist/${{ env.APP_NAME }}-${{ matrix.target }}.tar.gz
+            dist/${{ env.APP_NAME }}-${{ matrix.target }}.zip
