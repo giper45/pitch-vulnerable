@@ -51,6 +51,32 @@ jobs:
           cp -R "wasm-vulnerable-app" "dist/${{ env.APP_NAME }}-${{ matrix.target }}/wasm-vulnerable-app"
           rm -f "dist/${{ env.APP_NAME }}-${{ matrix.target }}/wasm-vulnerable-app/writeup.md"
 
+      - name: Validate required app files
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="dist/${{ env.APP_NAME }}-${{ matrix.target }}/wasm-vulnerable-app"
+          required=(
+            "app/index.php"
+            "app/router.php"
+            "app/bootstrap.php"
+            "app/lib/pv_core.php"
+            "wasmer.toml"
+          )
+
+          missing=0
+          for rel in "${required[@]}"; do
+            if [[ ! -f "$base/$rel" ]]; then
+              echo "Missing required file in bundle: $rel" >&2
+              missing=1
+            fi
+          done
+
+          if [[ "$missing" -ne 0 ]]; then
+            echo "Bundle validation failed: required files missing." >&2
+            exit 1
+          fi
+
       - name: Download Wasmer (v${{ env.WASMER_VERSION }})
         shell: bash
         run: |
